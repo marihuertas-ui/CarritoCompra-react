@@ -1,0 +1,110 @@
+import { useState } from "react";
+import ListaProductos from "./components/ListaProductos";
+import Carrito from "./components/Carrito";
+function App() {
+
+  const [carrito, setCarrito] = useState([]);
+
+  console.log("STATE carrito:", carrito);
+
+  function agregarAlCarrito(producto) {
+
+  console.log("Producto seleccionado:", producto);
+
+  const productoExiste = carrito.find(
+    item => item.id === producto.id
+  );
+
+  console.log(" ¿El producto ya existe?", productoExiste);
+
+  if (productoExiste) {
+
+    console.log(" El producto YA existe. Aumentamos cantidad.");
+    const nuevaCantidad = item.cantidad + 1;
+
+    console.log("Cantidad anterior:", item.cantidad);
+    console.log("Nueva cantidad:", nuevaCantidad);
+    setCarrito(
+      carrito.map(item =>
+        item.id === producto.id
+          ? {
+              ...item,
+              cantidad: item.cantidad + 1
+            }
+          : item
+      )
+    );
+
+  } else {
+
+    console.log(" El producto NO existe. Lo agregamos con cantidad 1.");
+
+    setCarrito([
+      ...carrito,
+      {
+        ...producto,
+        cantidad: 1
+      }
+    ]);
+  }
+}
+
+function aumentarCantidad(id) {
+  setCarrito(
+    carrito.map(producto =>
+      producto.id === id
+        ? {
+            ...producto,
+            cantidad: producto.cantidad + 1
+          }
+        : producto
+    )
+  );
+}
+
+function disminuirCantidad(id) {
+  setCarrito(
+    carrito
+      .map(producto =>
+        producto.id === id
+          ? {
+              ...producto,
+              cantidad: producto.cantidad - 1
+            }
+          : producto
+      )
+      .filter(producto => producto.cantidad > 0)
+  );
+}
+function eliminarDelCarrito(id) {
+  console.log("🗑️ Eliminando producto con ID:", id);
+  setCarrito(
+    carrito.filter(
+      producto => producto.id !== id
+    )
+  );
+}
+  return (
+    <div>
+      <h1>🍔 Food React</h1>
+
+      <ListaProductos
+        agregarAlCarrito={agregarAlCarrito}
+      />
+      <Carrito
+        carrito={carrito}
+        aumentarCantidad={aumentarCantidad}
+          disminuirCantidad={disminuirCantidad}
+           eliminarDelCarrito={eliminarDelCarrito}
+      />
+  
+
+    </div>
+
+ 
+  
+    
+  );
+}
+
+export default App;
