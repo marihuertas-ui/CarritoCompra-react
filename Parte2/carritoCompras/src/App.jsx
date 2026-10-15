@@ -11,7 +11,6 @@ import Productos from "./pages/Productos";
 import Ofertas from "./pages/Ofertas";
 import CarritoPage from "./pages/CarritoPage";
 import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
 import NavbarSuperior from "./components/NavbarSuperior";
 
 import {
@@ -166,6 +165,28 @@ const [carrito, setCarrito] = useState(
     setCarrito(nuevoCarrito);
   }
 
+    // ==========================================
+  // ELIMINAR PRODUCTO
+  // ==========================================
+
+  function eliminarDelCarrito(id) {
+
+    const productoEliminado = carrito.find(
+      producto => producto.id === id
+    );
+
+    console.log(
+      "Producto encontrado:",
+      productoEliminado
+    );
+
+    const nuevoCarrito = carrito.filter(
+      producto => producto.id !== id
+    );
+
+    setCarrito(nuevoCarrito);
+  }
+
 
   // ==========================================
   // RUTAS
@@ -194,11 +215,10 @@ const [carrito, setCarrito] = useState(
         <Route
           path="/productos"
           element={
-    <ProtectedRoute>
       <Productos
         agregarAlCarrito={agregarAlCarrito}
       />
-    </ProtectedRoute>
+    
   }
         />
 
@@ -208,9 +228,8 @@ const [carrito, setCarrito] = useState(
         <Route
           path="/ofertas"
           element={
-    <ProtectedRoute>
       <Ofertas />
-    </ProtectedRoute>
+
   }
         />
 
@@ -219,15 +238,13 @@ const [carrito, setCarrito] = useState(
 
         <Route
           path="/carrito"
-          element={
-    <ProtectedRoute>
+          element={ 
       <CarritoPage
         carrito={carrito}
         aumentarCantidad={aumentarCantidad}
         disminuirCantidad={disminuirCantidad}
         eliminarDelCarrito={eliminarDelCarrito}
       />
-    </ProtectedRoute>
   }
         />
 

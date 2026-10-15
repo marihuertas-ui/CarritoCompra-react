@@ -1,18 +1,17 @@
-import Producto from "./Producto";
 import productos from "../data/productos";
+import Producto from "./Producto";
 
 function ListaProductos({ agregarAlCarrito }) {
   return (
     <div>
-      {productos.map(item => (
+      {productos.map((producto) => (
+        
         <Producto
-          key={item.id}
-          producto={item}
-          agregarAlCarrito={agregarAlCarrito}
-         // nombre={item.nombre}
-         // precio={item.precio}
-         // emoji={item.emoji}
+            key={producto.id}
+          producto={producto}
+         agregarAlCarrito={agregarAlCarrito}
         />
+
       ))}
     </div>
   );

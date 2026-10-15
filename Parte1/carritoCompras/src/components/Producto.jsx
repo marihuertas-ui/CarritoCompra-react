@@ -2,7 +2,8 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-function Producto({ producto , agregarAlCarrito  }) {
+function Producto({ producto , agregarAlCarrito  }) 
+{
   console.log("Producto recibido:", producto);
 
   return (
@@ -17,11 +18,13 @@ function Producto({ producto , agregarAlCarrito  }) {
           ${producto.precio}
         </Card.Text>
 
-      <Button
-  onClick={() => agregarAlCarrito(producto)}
->
-  Agregar al carrito
-</Button>
+       <Button
+          onClick={() =>
+            agregarAlCarrito(producto)
+          }
+        >
+          Agregar al carrito
+        </Button>
 
       </Card.Body>
     </Card>
@@ -30,20 +33,22 @@ function Producto({ producto , agregarAlCarrito  }) {
 
 export default Producto;
 
-
-/*function Producto({ nombre, precio, emoji }) {
-//unction Producto(props) {
- // console.log(props);
-  console.log("Nombre:", nombre);
-  console.log("Precio:", precio);
-  console.log("Emoji:", emoji);
+//parte 1
+//function Producto({ nombre, precio, emoji }) {
+/*
+function Producto(props) {
+  console.log("Datos recibidos:", props.producto);
 
   return (
     <div>
-      <h3>{emoji} {nombre}</h3>
-      <p>Precio: ${precio}</p>
+      <h3>
+        {props.producto.emoji} {props.producto.nombre}
+      </h3>
+
+      <p>Precio: ${props.producto.precio}</p>
     </div>
   );
 }
 
-export default Producto;*/
+export default Producto;
+*/
